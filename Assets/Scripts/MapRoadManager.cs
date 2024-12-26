@@ -12,7 +12,7 @@ public class MapRoadManager : MonoSingleton<MapRoadManager>
     private Vector3 mapInterval;
 
     private Queue<Map> mapQueue = new Queue<Map>();
-    private List<Map> shuffleList = new List<Map>();
+    public List<Map> shuffleList = new List<Map>();
     private Random rand = new Random();
     private GameObject previousMapObj;
     private GameObject currentMapObj;
@@ -27,29 +27,43 @@ public class MapRoadManager : MonoSingleton<MapRoadManager>
 
     void Start()
     {
-        
-    }
+        MapShuffle();
+        int count = mapQueue.Count;
 
-    void Update()
-    {
-        
-    }
-
-    void MapRoad()
-    {
-        for(int i = 0; i < mapQueue.Count; i++)
+        for(int i = 0; i < count; i++)
         {
-            GameObject mapObj = PoolManager.Instance.GetMap(mapQueue.Dequeue());
+            MapRoad();
+        }
+    }
 
-            if(previousMapObj != null)
+    public void MapRoad()
+    {
+        if(mapQueue.Count == 0)
+        {
+            MapShuffle();
+        }
+
+        GameObject mapObj = PoolManager.Instance.GetMap(mapQueue.Dequeue());
+        Debug.Log($"Map : {mapObj.name}");
+
+        if(currentMapObj != null)
+        {
+            previousMapObj = currentMapObj;
+            currentMapObj = mapObj;
+        }
+        else
+        {
+            currentMapObj = mapObj;
+        }
+
+        if(previousMapObj != null)
+        {
+            foreach(Transform child in previousMapObj.transform)
             {
-                foreach(Transform child in mapObj.transform)
+                if(child.CompareTag("End"))
                 {
-                    if(child.CompareTag("End"))
-                    {
-                        mapObj.transform.position = child.transform.position + mapInterval;
-                        break;
-                    }
+                    currentMapObj.transform.position = child.transform.position + mapInterval;
+                    break;
                 }
             }
         }
@@ -57,20 +71,17 @@ public class MapRoadManager : MonoSingleton<MapRoadManager>
 
     void MapShuffle()
     {
-        if(mapQueue.Count == 0)
+        for(int i = shuffleList.Count - 1; i > 0; i--)
         {
-            for(int i = shuffleList.Count - 1; i > 0; i--)
-            {
-                int index = rand.Next(i + 1);
-                var value = shuffleList[i];
-                shuffleList[i] = shuffleList[index];
-                shuffleList[index] = value;
-            }
+            int index = rand.Next(i + 1);
+            var value = shuffleList[i];
+            shuffleList[i] = shuffleList[index];
+            shuffleList[index] = value;
+        }
 
-            foreach(Map map in shuffleList)
-            {
-                mapQueue.Enqueue(map);
-            }
+        foreach(Map map in shuffleList)
+        {
+            mapQueue.Enqueue(map);
         }
     }
 }

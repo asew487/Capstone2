@@ -30,6 +30,5 @@ public class PlayerInputSystem : MonoSingleton<PlayerInputSystem>
         Look =  _playerControls.Chair.Look.ReadValue<Vector2>();
         Rotate = _playerControls.Chair.Rotate.ReadValue<Vector2>().x;
 
-        Debug.Log(Rotate);
     }
 }

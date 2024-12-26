@@ -169,7 +169,7 @@ GameObject:
   - component: {fileID: 189418484}
   m_Layer: 0
   m_Name: XRRig
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -232,7 +232,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53df0079091beb640a2eaade81b289d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 10
 --- !u!114 &189418482
 MonoBehaviour:
   m_ObjectHideFlags: 0

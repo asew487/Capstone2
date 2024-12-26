@@ -13,6 +13,7 @@ public class PoolManager : MonoSingleton<PoolManager>
             {
                 map.SetActive(true);
                 map.transform.parent = null;
+                mapPool.Remove(map);
                 return map;
             }
         }

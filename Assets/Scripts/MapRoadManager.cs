@@ -44,7 +44,6 @@ public class MapRoadManager : MonoSingleton<MapRoadManager>
         }
 
         GameObject mapObj = PoolManager.Instance.GetMap(mapQueue.Dequeue());
-        Debug.Log($"Map : {mapObj.name}");
 
         if(currentMapObj != null)
         {

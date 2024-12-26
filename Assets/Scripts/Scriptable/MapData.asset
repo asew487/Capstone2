@@ -14,11 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maps:
   - map: {fileID: 1651348369192450380, guid: c91cd8fcb15822a4ea101881058c35d5, type: 3}
-    startPos: {fileID: 0}
-    endPos: {fileID: 0}
+    id: Map1
   - map: {fileID: 436966984164263337, guid: eeb24bfce4bf3304e8510af180a647b6, type: 3}
-    startPos: {fileID: 0}
-    endPos: {fileID: 0}
+    id: Map2
   - map: {fileID: 8788211045015510835, guid: aec4d22b6d697614f9e66c5e7db7c944, type: 3}
-    startPos: {fileID: 0}
-    endPos: {fileID: 0}
+    id: Map3

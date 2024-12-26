@@ -8,9 +8,14 @@ public class MapRoadManager : MonoSingleton<MapRoadManager>
     
     public MapData mapData;
 
+    [SerializeField]
+    private Vector3 mapInterval;
+
     private Queue<Map> mapQueue = new Queue<Map>();
     private List<Map> shuffleList = new List<Map>();
     private Random rand = new Random();
+    private GameObject previousMapObj;
+    private GameObject currentMapObj;
 
     void Awake()
     {
@@ -28,6 +33,26 @@ public class MapRoadManager : MonoSingleton<MapRoadManager>
     void Update()
     {
         
+    }
+
+    void MapRoad()
+    {
+        for(int i = 0; i < mapQueue.Count; i++)
+        {
+            GameObject mapObj = PoolManager.Instance.GetMap(mapQueue.Dequeue());
+
+            if(previousMapObj != null)
+            {
+                foreach(Transform child in mapObj.transform)
+                {
+                    if(child.CompareTag("End"))
+                    {
+                        mapObj.transform.position = child.transform.position + mapInterval;
+                        break;
+                    }
+                }
+            }
+        }
     }
 
     void MapShuffle()

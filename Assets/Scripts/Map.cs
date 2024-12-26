@@ -4,6 +4,5 @@ using UnityEngine;
 public class Map
 {
     public GameObject map;
-    public Transform startPos;
-    public Transform endPos;
+    public string id;
 }

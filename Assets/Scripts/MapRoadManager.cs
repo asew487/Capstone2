@@ -10,6 +10,8 @@ public class MapRoadManager : MonoSingleton<MapRoadManager>
 
     [SerializeField]
     private Vector3 mapInterval;
+    [SerializeField]
+    private int fixedMapValue = 3;
 
     private Queue<Map> mapQueue = new Queue<Map>();
     public List<Map> shuffleList = new List<Map>();
@@ -27,12 +29,26 @@ public class MapRoadManager : MonoSingleton<MapRoadManager>
 
     void Start()
     {
-        MapShuffle();
-        int count = mapQueue.Count;
-
-        for(int i = 0; i < count; i++)
+        if(mapData.maps.Length >= 3)
         {
-            MapRoad();
+            for(int i = 0; i < fixedMapValue; i++)
+            {
+                mapQueue.Enqueue(mapData.maps[i]);
+            }
+            for(int i = 0; i < fixedMapValue; i++)
+            {
+                MapRoad();
+            }
+        }
+        else
+        {
+            MapShuffle();
+            int count = mapQueue.Count;
+
+            for(int i = 0; i < count; i++)
+            {
+                MapRoad();
+            }
         }
     }
 
